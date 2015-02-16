@@ -1,2 +1,1 @@
-# 主にプログラム系をうｐします
-#Adachinより
+#Hello Adachin!!!!!!!
