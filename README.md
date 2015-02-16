@@ -1,1 +1,2 @@
-# adachin_git
+# 主にプログラム系をうｐします
+#Adachinより
