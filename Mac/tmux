@@ -1,0 +1,24 @@
+bind r source-file ~/.tmux.conf \; display-message "Reload Config!!"
+set-window-option -g mode-keys vi
+
+set-option -g status-fg colour125
+set-option -g status-bg colour189
+set-window-option -g window-status-current-fg colour125
+set-window-option -g window-status-current-bg colour189
+set-window-option -g window-status-current-attr bold
+
+# #20はlengthの値 #1だと一文字しか表示されない
+#set -g status-left  '[#20(whoami)]#[default]'
+set -g status-left  '†#20 Adachin†#[default]'
+set -g status-right '27%Y/%m/%d(%a)%H:%M#[default]'
+
+set -g status-left-length 32
+set -g status-right-length 150
+
+set-option -g base-index 1
+
+set -g mode-mouse on
+set -g mouse-resize-pane on
+set -g mouse-select-pane on
+set -g mouse-select-window on
+set-option -g mouse-resize-pane on
