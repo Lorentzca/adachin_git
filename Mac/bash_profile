@@ -10,7 +10,7 @@ if [ -f ~/.bashrc ] ; then
   export CLICOLOR=1
   export LSCOLORS=ExFxBxDxCxegedabagacad
   export PS1='\h:\W \d \t \$ '
-  export PS1="\[\e[1;32m\][@\h:\w]\$\[\e[00m\] "
+  export PS1="\[\e[1;32m\][@\h:\w \d \t]\$\[\e[00m\] "
 
 
 
