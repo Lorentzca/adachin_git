@@ -22,3 +22,4 @@ set -g mouse-resize-pane on
 set -g mouse-select-pane on
 set -g mouse-select-window on
 set-option -g mouse-resize-pane on
+setw -g window-status-current-fg white
