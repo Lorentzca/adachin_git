@@ -11,12 +11,12 @@ set-option -g status-right-length 90
 set-option -g status-left "#(~/.tmux/tmux-powerline/powerline.sh left)"
 set-option -g status-right "#(~/.tmux/tmux-powerline/powerline.sh right)"
 
-# set-option -g status-fg red
-# set-option -g status-bg black
-# set-window-option -g window-status-current-fg black
-# set-window-option -g window-status-current-bg colour189
-# set-window-option -g window-status-current-attr bold
-#
+set-option -g status-fg red
+set-option -g status-bg black
+set-window-option -g window-status-current-fg black
+set-window-option -g window-status-current-bg colour189
+set-window-option -g window-status-current-attr bold
+
 # # #20はlengthの値 #1だと一文字しか表示されない
 # #set -g status-left  '[#20(whoami)]#[default]'
 # set -g status-left  '#20 Adachin#[default]'
