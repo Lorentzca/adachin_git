@@ -1,23 +1,22 @@
+
+#set-option -g default-shell /bin/zsh
 bind r source-file ~/.tmux.conf \; display-message "Reload Config!!"
 set-window-option -g mode-keys vi
-
-set-option -g status-fg red
-set-option -g status-bg black
-set-window-option -g window-status-current-fg black
-set-window-option -g window-status-current-bg colour189
-set-window-option -g window-status-current-attr bold
 
 set-option -g status on
 set-option -g status-interval 2
 set-option -g status-utf8 on
 set-option -g status-justify "centre"
-set-option -g status-left-length 60
-set-option -g status-right-length 90
+set-option -g status-left-length 120
+set-option -g status-right-length 100
 set-option -g status-left "#(~/.tmux/tmux-powerline/powerline.sh left)"
-set-option -g status-right "#(~/.tmux/tmux-powerline/powerline.sh right)"
+set-option -g status-right "#(~/.tmux/tmux-powerline/powerline.sh right)
 
-
-set-option -g base-index 1
+ set-option -g status-fg red
+ set-option -g status-bg black
+ set-window-option -g window-status-current-fg black
+ set-window-option -g window-status-current-bg colour189
+ set-window-option -g window-status-current-attr bold
 
 set -g mode-mouse on
 set -g mouse-resize-pane on
@@ -25,6 +24,3 @@ set -g mouse-select-pane on
 set -g mouse-select-window on
 set-option -g mouse-resize-pane on
 setw -g window-status-current-fg blue
-
-#git clone https://github.com/erikw/tmux-powerline.git
-#git clone git@github.com:powerline/fonts.git
