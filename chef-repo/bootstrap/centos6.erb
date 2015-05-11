@@ -1,0 +1,54 @@
+bash -c $'
+<%= "export http_proxy=\"#{knife_config[:bootstrap_proxy]}\"" if knife_config[:bootstrap_proxy] -%>
+
+if [ ! -f /opt/rbenv/shims/chef-client ]; then
+yum install -y git gcc-c++ openssl-devel dstat
+
+export RBENV_ROOT=/opt/rbenv
+export PATH=${RBENV_ROOT}/bin:${PATH}
+
+git clone git://github.com/sstephenson/rbenv.git ${RBENV_ROOT}
+git clone git://github.com/sstephenson/ruby-build.git ${RBENV_ROOT}/plugins/ruby-build
+
+rbenv install 2.1.2
+rbenv global 2.1.2
+
+eval "$(rbenv init -)"
+
+ruby -v
+
+gem install chef -v 11.14.2
+rbenv rehash
+
+fi
+
+yum update -y
+
+if [ -f /etc/chef/client.pem ]; then
+  rm -f /etc/chef/client.pem
+fi
+
+mkdir -p /etc/chef/client.d
+
+cat > /etc/chef/validation.pem <<'EOP'
+<%= validation_key %>
+EOP
+chmod 0600 /etc/chef/validation.pem
+
+<% encrypted_data_bag_secret -%>
+cat > /etc/chef/encrypted_data_bag_secret <<'EOP'
+<%= encrypted_data_bag_secret %>
+EOP
+chmod 0600 /etc/chef/encrypted_data_bag_secret
+
+cat > /etc/chef/client.rb <<'EOP'
+<%= config_content %>
+EOP
+
+cat > /etc/chef/first-boot.json <<'EOP'
+<%= first_boot.to_json %>
+EOP
+
+<%= start_chef %>
+
+#/sbin/shutdown -r now'
