@@ -1,3 +1,1 @@
-#Hello Adachin!!!!!!!
-#ここではスクリプト、Macの機能いろいろ、chefなどのリポジトリです。
-
+#Hello Adachin repository
