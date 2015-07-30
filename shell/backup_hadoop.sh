@@ -36,7 +36,7 @@ NO_SLASH_NODATE=`echo ${NODATE}`
 # 共通環境変数
 #=============================================================================
 HDFS_BASE_DIR="/user/hdfs/hoge"
-KUDAN_BSSE_DIR="/data/hoge"
+HOGE_BSSE_DIR="/data/hoge"
 
 #===============================================================================
 # hoge バックアップ
@@ -44,7 +44,7 @@ KUDAN_BSSE_DIR="/data/hoge"
 echo "[hoge バックアップ `date +'%Y/%m/%d %k:%M:%S'`]"
 
 HDFS_SEGUEMT_USERSUM_DIR="${HDFS_BASE_DIR}/hoge/${DATE}"
-LOCAL_SEGMENT_USERSUM_BASE_DIR="${KUDAN_BSSE_DIR}/hoge"
+LOCAL_SEGMENT_USERSUM_BASE_DIR="${HOGE_BSSE_DIR}/hoge"
 LOCAL_SEGMENT_USERSUM_TARGET_DATE_DIR="${LOCAL_SEGMENT_USERSUM_BASE_DIR}/${NO_SLASH_DATE}"
 
 
