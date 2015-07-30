@@ -3,14 +3,8 @@
 # Zabbix monitoring script
 #
 # nginx:
-#  - anything available via nginx stub-status module
+#  nginxのグラフスクリプト
 #
-##################################
-# Contact:
-#  vincent.viallet@gmail.com
-##################################
-# ChangeLog:
-#  20100922     VV      initial creation
 ##################################
 
 # Zabbix requested parameter
