@@ -8,7 +8,7 @@ if [ -f ~/.bashrc ] ; then
   export CLICOLOR=1
   export LSCOLORS=ExFxBxDxCxegedabagacad
   export PS1="\[\e[1;32m\][@\h:\W \d \t]\$\[\e[00m\] "
-  #export PS1="\[\e[1;32m\][\u@\h:\W \d \t]\$\[\e[00m\] " ユーザ名付き
+  #export PS1="\[\e[1;32m\][\u@\h:\W \d \t]\$\[\e[00m\] " #ユーザ名付き
 
 
 # exec $SHELL -l シェル再起動
