@@ -13,6 +13,7 @@
 		095F8AC91B84B8F7002EE187 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 095F8AC81B84B8F7002EE187 /* Images.xcassets */; };
 		095F8ACC1B84B8F7002EE187 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 095F8ACA1B84B8F7002EE187 /* LaunchScreen.xib */; };
 		095F8AD81B84B8F7002EE187 /* MapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095F8AD71B84B8F7002EE187 /* MapTests.swift */; };
+		095F8AE21B84BC3D002EE187 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 095F8AE11B84BC3D002EE187 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		095F8AD11B84B8F7002EE187 /* MapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		095F8AD61B84B8F7002EE187 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		095F8AD71B84B8F7002EE187 /* MapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTests.swift; sourceTree = "<group>"; };
+		095F8AE11B84BC3D002EE187 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				095F8AE21B84BC3D002EE187 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,6 +62,7 @@
 		095F8AB31B84B8F7002EE187 = {
 			isa = PBXGroup;
 			children = (
+				095F8AE11B84BC3D002EE187 /* MapKit.framework */,
 				095F8ABE1B84B8F7002EE187 /* Map */,
 				095F8AD41B84B8F7002EE187 /* MapTests */,
 				095F8ABD1B84B8F7002EE187 /* Products */,
