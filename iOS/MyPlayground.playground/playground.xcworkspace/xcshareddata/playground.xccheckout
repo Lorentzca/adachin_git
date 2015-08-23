@@ -5,20 +5,20 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>4D8E12E5-B823-4B52-B19C-057DF6AB1AEC</string>
+	<string>46A0FD7A-8618-49AB-9C3E-161D6E09EF39</string>
 	<key>IDESourceControlProjectName</key>
-	<string>Map</string>
+	<string>playground</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>9C3C00E7B3EE9CC9B2649655E7678BA85DF9174D</key>
 		<string>github.com:RVIRUS0817/adachin_git.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>iOS/Map/Map.xcodeproj</string>
+	<string>iOS/MyPlayground.playground/playground.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>9C3C00E7B3EE9CC9B2649655E7678BA85DF9174D</key>
-		<string>../../../..</string>
+		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>github.com:RVIRUS0817/adachin_git.git</string>
