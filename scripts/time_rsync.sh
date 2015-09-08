@@ -1,10 +1,12 @@
 #!/bin/sh
-#rsync_timescripts
-#実行したコマンドがどのくらいなのか
+#実行したコマンドがどのくらいかかったのか
 
-echo "time" 
+ for x in `seq 1 5`; do
+echo -n "start server"$x":" 
+echo `date "+%Y%m%d_%H%M%S"`
 
-  time -p {
-    rsync -a --rsync-path="ionice -c2 -n7 nice -n19 rsync" /hoge /newhoge
-  }
-done
+rsync -av hoge server$x::hoge /hoge
+echo -n "end server"$x":" 
+
+echo `date "+%Y%m%d_%H%M%S"`
+ done
