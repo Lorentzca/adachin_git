@@ -1,5 +1,5 @@
 #!/bin/sh
-#実行したコマンドがどのくらいかかったのか
+#How many times 
 
  for x in `seq 1 5`; do
 echo -n "start server"$x":" 
