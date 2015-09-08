@@ -10,3 +10,9 @@ echo -n "end server"$x":"
 
 echo `date "+%Y%m%d_%H%M%S"`
  done
+
+
+#cron
+
+00,30 1-23 * * * /usr/bin/setlock -nx /tmp/rsync.lock /hoge/bin/time_rsync.sh > /var/tmp/rsync_server_`date +'\%Y\
+%m\%d\%H\%M'`
