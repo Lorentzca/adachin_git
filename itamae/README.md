@@ -1,7 +1,7 @@
-#run server
+#1.run server
 $ sudo gem install itamae
 
-#make a recipe
+#2.make a recipe
 
-#run recipe
+#3.run recipe
 $ itamae ssh --user ~/itamae/*
