@@ -1,5 +1,4 @@
 execute "update yum repo" do 
    user "root" 
-    command "yum -y update" 
-    command "yum -y upgrade" 
+    command "yum -y update;yum -y upgrade" 
 end
