@@ -35,6 +35,7 @@ print("バッテリー残量はあと\(aboutbattery)%です")
 var bodyTemp:Double = 36
 bodyTemp = 36.5
 
+//20%以下ならメッセージ出す
 var aboutBattery = 15
 
 if aboutBattery <= 20 {
