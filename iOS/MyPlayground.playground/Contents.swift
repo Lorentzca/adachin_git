@@ -9,17 +9,36 @@ let tax = 1.08
 
 //繰り返し
 for n in 1...9 {
-    println(3 * n)
-    println(4 * n)
+    print(3 * n)
 }
 
 var sum = 0
 for n in 1...100 {
     sum = sum + n
 }
-println(sum)
+print(sum)
 for x in 1...9 {
     for n in 1...9 {
-        println(x * n)
+        print(x * n)
     }
 }
+
+print("バッテリー残量が残り少なくなってきています")
+
+
+var alert = "バッテリー残量が残り少なくなってきています"
+print(alert)
+
+var aboutbattery = 20
+print("バッテリー残量はあと\(aboutbattery)%です")
+
+var bodyTemp:Double = 36
+bodyTemp = 36.5
+
+var aboutBattery = 15
+
+if aboutBattery <= 20 {
+    print("バッテリー残量が少なくなってきています。")
+}
+
+
