@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:../../GitHub/adachin_git/iOS/MyPlayground.playground">
+      location = "self:">
    </FileRef>
 </Workspace>
