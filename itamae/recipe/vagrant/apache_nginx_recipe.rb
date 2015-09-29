@@ -10,3 +10,17 @@ end
 #apache
 package "httpd" do
 end
+
+HTTPD00 = "httpd-00.conf"
+
+directory "/etc/httpd/conf.d.local" do
+end
+
+file "/etc/httpd/conf.d.local/#{HTTPD00}" do
+end
+
+template "/etc/httpd/conf.d.local/#{HTTPD00}" do
+  owner "root"
+  source "~/httpd_template/#{HTTPD00}.erb"
+    variables(goodbye: "Good bye")
+  end
