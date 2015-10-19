@@ -12,7 +12,10 @@ user "adachin" do
  SSH_KEY = "ssh-rsa ~"
 
  directory "/home/#{USER_NAME}/.ssh" do
- end
+  owner USER_NAME
+  group USER_NAME
+  mode  "700"
+end
 
  file "/home/#{USER_NAME}/.ssh/authorized_keys" do
    content SSH_KEY
