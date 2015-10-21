@@ -1,0 +1,13 @@
+{
+  "ruby-env": {
+    "user": "vagrant",
+    "group": "vagrant",
+    "rbenv_path": "$HOME/.rbenv/bin",
+    "rbenv_url": "sstephenson/rbenv.git",
+    "ruby-build_url": "sstephenson/ruby-build.git",
+    "rbenv-default-gems_url": "sstephenson/rbenv-default-gems.git",
+    "rbenv-gem-rehash_url": "sstephenson/rbenv-gem-rehash.git",
+    "versions": ["2.1.5"],
+    "global_version": "2.1.5"
+  }
+}
