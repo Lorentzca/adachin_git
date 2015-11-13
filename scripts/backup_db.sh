@@ -1,16 +1,11 @@
-
 # /bin/sh
 
-BASE_FILE_NAME=mysql
-FILE=${BASE_FILE_NAME}.`date +\%Y-\%m-\%d`.gz
-OUTPUT=~/db_back/${FILE}
+OUTPUTDIR="/home/adachin/db_back" 
+for x in hogedb; do
 
-for x in mysql; do
-mysqldump -h localhost -u root -B $x | gzip > ${OUTPUT}
+  FILE=$OUTPUTDIR/$x.`date +\%Y-\%m-\%d`.sql.gz
+  OLD_FILE=$OUTPUTDIR/$x.`date +\%Y-\%m-\%d --date "-30 days"`.sql.gz
+  mysqldump -h localhost -u root $x | gzip > ${FILE}
+
+  rm -f ${OLD_FILE}
 done
-
-OLD_FILE=${BASE_FILE_NAME}.`date +\%Y-\%m-\%d --date "-30 days"`.gz
-OLD_OUTPUT=~/db_back/${OLD_FILE}
-
-rm -f ${OLD_OUTPUT}
-
