@@ -1,95 +1,58 @@
 #!/bin/bash
 
-# config
-slack_url='https://hooks.slack.com/services/XXX/XXXX/XXXXX'
-slack_username='Zabbix'
-channel="$1"
-title="$2"
-params="$3"
+
+# Slack sub-domain name (without '.slack.com'), user name, and the channel to send the message to
+channel='#alert'
+username='Zabbix'
+
+# Associative array to deal with colors
+declare -A severityArray=(
+  ["Not_classified"]="#DBDBDB"
+  ["Information"]="#D6F6FF"
+  ["Warning"]="#FFF6A5"
+  ["Average"]="#FFB689"
+  ["High"]="#FF9999"
+  ["Disaster"]="#FF3838"
+)
+
+# Get the Slack incoming web-hook token ($1) and Zabbix subject ($2 - hopefully either PROBLEM or RECOVERY)
+token="https://hooks.slack.com/services/"
+strSubject="$2"
+
+# Extract status & severity from subject:
+# * status [OK|PROBLEM]
+# * severity [Not classified|Information|Warning|Average|High|Disaster]
+arrSubject=(${strSubject//-/ })
+status=${arrSubject[0]}
+severity=${arrSubject[1]}
+
+# Change message emoji depending on the status - smile (RECOVERY), frowning (PROBLEM), or ghost (for everything else)
 emoji=':ghost:'
-timeout="5"
-cmd_curl="/usr/bin/curl"
-
-# set params
-host="`echo \"${params}\" | grep 'HOST: ' | awk -F'HOST: ' '{print $2}' | sed -e 's/
-//g'`"
-trigger_name="`echo \"${params}\" | grep 'TRIGGER_NAME: ' | awk -F'TRIGGER_NAME: ' '{print $2}' | sed -e 's/
-//g'`"
-trigger_status="`echo \"${params}\" | grep 'TRIGGER_STATUS: ' | awk -F'TRIGGER_STATUS: ' '{print $2}' | sed -e 's/
-//g'`"
-trigger_severity="`echo \"${params}\" | grep 'TRIGGER_SEVERITY: ' | awk -F'TRIGGER_SEVERITY: ' '{print $2}' | sed -e 's/
-//g'`"
-trigger_url="`echo \"${params}\" | grep 'TRIGGER_URL: ' | awk -F'TRIGGER_URL: ' '{print $2}' | sed -e 's/
-//g'`"
-datetime="`echo \"${params}\" | grep 'DATETIME: ' | awk -F'DATETIME: ' '{print $2}' | sed -e 's/
-//g'`"
-item_value="`echo \"${params}\" | grep 'ITEM_VALUE: ' | awk -F'ITEM_VALUE: ' '{print $2}' | sed -e 's/
-//g'`"
-event_id="`echo \"${params}\" | grep 'EVENT_ID: ' | awk -F'EVENT_ID: ' '{print $2}' | sed -e 's/
-//g'`"
-
-# set color
-if [ "${trigger_status}" == 'OK' ]; then
-  case "${trigger_severity}" in
-    'Information')
-      color="#439FE0"
-      ;;
-    *)
-      color="good"
-      ;;
-  esac
-elif [ "${trigger_status}" == 'PROBLEM' ]; then
-  case "${trigger_severity}" in
-    'Information')
-      color="#439FE0"
-      ;;
-    'Warning')
-      color="warning"
-      ;;
-    *)
-      color="danger"
-      ;;
-  esac
-else
-  color="#808080"
+color='#FFFFFF'
+if [ "$status" == 'RECOVERY' ]; then
+  emoji=':smile:'
+  color='good'
+  title=${status}
+elif [ "$status" == 'PROBLEM' ]; then
+  emoji=':scream:'
+  #color=${severityArray["${severity// /_}"]}
+  color='CC0000'
+  #title=${severity}
+  title=${status}
 fi
 
-# set payload
-payload="payload={
-  \"channel\": \"${channel}\",
-  \"username\": \"${slack_username}\",
-  \"icon_emoji\": \"${emoji}\",
-  \"attachments\": [
-    {
-      \"fallback\": \"Date / Time: ${datetime} - ${title}\",
-      \"title\": \"${title}\",
-      \"title_link\": \"${trigger_url}\",
-      \"color\": \"${color}\",
-      \"fields\": [
-        {
-            \"title\": \"Date / Time\",
-            \"value\": \"${datetime}\",
-            \"short\": true
-        },
-        {
-            \"title\": \"Status\",
-            \"value\": \"${trigger_status}\",
-            \"short\": true
-        },
-        {
-            \"title\": \"Host\",
-            \"value\": \"${host}\",
-            \"short\": true
-        },
-        {
-            \"title\": \"Trigger\",
-            \"value\": \"${trigger_name}: ${item_value}\",
-            \"short\": true
-        }
-      ]
-    }
-  ]
+# Prepare attachment payload so that we can customize
+# how Slack will display allert
+attachment="
+{
+  \"title\":\"${title}\",
+  \"fallback\":\"*${title}*\n$3\",
+  \"text\":\"$3\",
+  \"color\":\"${color}\",
+  \"mrkdwn_in\": [\"text\", \"title\", \"fallback\"]
 }"
 
-# send to slack
-${cmd_curl} -m ${timeout} --data-urlencode "${payload}" "${slack_url}"
+# Build our JSON payload and send it as a POST request to the Slack incoming web-hook URL
+payload="payload={\"channel\": \"${channel}\", \"username\": \"${username}\", \"icon_emoji\": \"${emoji}\", \"attachments\":[${attachment}]}"
+
+/usr/bin/curl -m 5 --data "${payload}" "https://hooks.slack.com/services"
