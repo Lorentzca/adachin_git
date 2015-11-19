@@ -5,16 +5,6 @@
 channel='#hoge'
 username='Zabbix'
 
-# Associative array to deal with colors
-declare -A severityArray=(
-  ["Not_classified"]="#DBDBDB"
-  ["OK"]="#D6F6FF"
-  ["Warning"]="#FFF6A5"
-  ["CRITICAL"]="#FFB689"
-  ["High"]="#FF9999"
-  ["DOWN"]="#FF3838"
-)
-
 # Get the Slack incoming web-hook token ($1) and Zabbix subject ($2 - hopefully either PROBLEM or RECOVERY)
 token="https://hooks.slack.com/services/hoge"
 strSubject="$2"
