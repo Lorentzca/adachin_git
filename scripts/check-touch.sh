@@ -19,3 +19,7 @@ for x in `seq 1 10`; do
 done
 
 rm -rf $hogerm
+
+#cron
+15 * * * * check_touch.sh >/dev/null 2>&1
+
