@@ -1,0 +1,7 @@
+---
+- user:
+    name: adachi
+    generate_ssh_key: yes
+    shell: /bin/bash
+    groups: wheel
+

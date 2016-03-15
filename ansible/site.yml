@@ -1,0 +1,30 @@
+---
+- hosts: aws-ec2
+  remote_user: ec2-user
+  #become: True
+  become: yes
+  become_user: root
+  pre_tasks:
+    - include: roles/common/tasks/hostname.yml
+      tags: common
+  roles:
+    - { role: common, tags: 'common' }
+    - { role: nginx, tags: 'nginx' }
+    - { role: sshd, tags: 'sshd' }
+  tasks:
+    - include: roles/common/tasks/user.yml
+      tags: common
+    - include: roles/nginx/tasks/conf.yml
+      tags: nginx-conf
+
+#- hosts: tag_ansible_role_ohta_isan
+#  remote_user: ec2-user
+#  become: True
+#  become_user: root
+#  pre_tasks:
+#    - include: roles/common/tasks/hostname.yml
+#      tags: common
+#  roles:
+#    - { role: nginx, tags: 'nginx' }
+#    - { role: sshd, tags: 'sshd' }
+

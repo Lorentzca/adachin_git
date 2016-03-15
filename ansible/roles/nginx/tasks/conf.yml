@@ -1,0 +1,13 @@
+---
+- name: copy nginx conf
+  copy:
+    src: "{{ item.src }}"
+    dest: "/etc/nginx/{{ item.dest }}"
+    backup: yes
+    owner: root
+    group: root
+  with_items:
+    - { src: roles/nginx/files/nginx.conf, dest: . }
+    - { src: roles/nginx/files/conf.d/default.conf, dest: conf.d/ }
+  tags:
+    - nginx-conf

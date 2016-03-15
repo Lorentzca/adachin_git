@@ -1,0 +1,67 @@
+---
+#- action: ec2_facts
+#- name: Server Name
+#  action: debug msg={{ ec2_tag_Name }}
+
+- name: /etc/sysconfig/i18n
+  lineinfile:
+    dest: /etc/sysconfig/i18n
+    line: 'LANG={{ locale }}'
+    regexp: 'LANG=en_US.UTF-8'
+
+- name: /etc/sysconfig/clock
+  lineinfile:
+    dest: /etc/sysconfig/clock
+    line: 'ZONE={{ timezone }}'
+    regexp: 'ZONE=UTC'
+
+- name: /etc/sysconfig/clock
+  lineinfile:
+    dest: /etc/sysconfig/clock
+    line: 'UTC=false'
+    regexp: 'UTC=true'
+
+
+- name: set /etc/localtime to {{ timezone }}
+  file: src=/usr/share/zoneinfo/{{ timezone }} dest=/etc/localtime state=link force=yes mode=0644
+
+- name: install common packages
+  yum: name={{ item }} state=latest
+  with_items:
+    - tmux
+    - tree
+    - zsh
+
+- name: limits.conf
+  copy:
+    src: limits.conf
+    backup: yes
+    dest: /etc/security/limits.conf
+
+#- name: check swapfile
+#  stat: path=/data/swapfile
+#  register: swap
+
+#- name: create 10GB swap if swapfile not exists
+#  shell: >
+#    dd if=/dev/zero of=/media/ephemeral0/swapfile bs=1M count=10240;
+#    chmod 600 /data/swapfile;
+#    mkswap /data/swapfile;
+#    swapon /data/swapfile;
+#  when: not swap.stat.exists
+
+#- lineinfile:
+#    dest: /etc/fstab
+#    line: /data/swapfile   swap        swap    defaults        0   0
+
+- name: /etc/rc.d/rc.local create swap
+  blockinfile:
+    dest: /etc/rc.d/rc.local
+    create: no
+    block: |
+      dd if=/dev/zero of=/media/ephemeral0/swapfile bs=1M count=10240;
+      chmod 600 /media/ephemeral0/swapfile;
+      mkswap /media/ephemeral0/swapfile;
+      swapon /media/ephemeral0/swapfile;
+
+

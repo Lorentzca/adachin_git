@@ -1,0 +1,5 @@
+# file: hosts
+
+[aws-ec2]
+hostname ansible_ssh_host=IP
+

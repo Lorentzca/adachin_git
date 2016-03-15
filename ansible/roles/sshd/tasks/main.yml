@@ -1,0 +1,12 @@
+---
+- name: copy sshd_config
+  copy:
+    src: "{{ item.src }}"
+    dest: "/etc/ssh/{{ item.dest }}"
+    backup: yes
+    owner: root
+    group: root
+  with_items:
+    - { src: roles/sshd/files/sshd_config, dest: sshd_config }
+  tags:
+    - sshd
