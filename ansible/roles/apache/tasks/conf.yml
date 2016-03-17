@@ -1,0 +1,14 @@
+---
+- name: copy httpd conf
+  copy:
+    src: "{{ item.src }}"
+    dest: "/etc/httpd/{{ item.dest }}"
+    backup: yes
+    owner: root
+    group: root
+  with_items:
+    - { src: roles/apache/files/nginx.conf, dest: . }
+    - { src: roles/apache/files/conf.d/ohta-isan.asia.conf, dest: conf.d/ohta-isan.asia.conf }
+    - { src: roles/apache/files/conf.d/stage.conf, dest: conf.d/stage.conf }
+  tags:
+    - httpd-conf

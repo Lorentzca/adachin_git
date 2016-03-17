@@ -1,0 +1,29 @@
+---
+- name: install yum packages
+  yum: name={{ item }} state=latest
+  with_items:
+- httpd
+- python-setuptools
+- php
+- php-pear 
+- php-mysql
+- php-mbstring
+- php-gd 
+- php-mcrypt 
+- php-pecl-apc
+
+- name: install easy_install package
+  easy_install: name=pip
+
+- name: install pip package
+  pip: name=httplib2
+
+- name: copy index.html
+  copy: src=centos/index.html dest=/var/www/html
+
+- name: start httpd
+  service: name=httpd enabled=yes state=started
+
+- name: check httpd is working
+  uri: url=http://localhost/
+
