@@ -11,11 +11,14 @@
     - { role: common, tags: 'common' }
     - { role: nginx, tags: 'nginx' }
     - { role: sshd, tags: 'sshd' }
+    - { role: apache, tags: 'apache' }
   tasks:
     - include: roles/common/tasks/user.yml
       tags: common
     - include: roles/nginx/tasks/conf.yml
       tags: nginx-conf
+    - include: roles/apache/tasks/conf.yml
+      tags: httpd-conf
 
 #- hosts: tag_ansible_role_ohta_isan
 #  remote_user: ec2-user

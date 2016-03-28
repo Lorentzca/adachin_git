@@ -5,9 +5,12 @@ $ ansible-playbook site.yml -i hosts -l aws-ec2 --tags common --check
 sshd_config  
   $ ansible-playbook site.yml -i hosts -l aws-ec2 --tags sshd --check
 #apache,nginx
-バーチャルの設定、php系も  
+バーチャルの設定  
 $ ansible-playbook site.yml -i hosts -l aws-ec2 --tags apache --check  
 $ ansible-playbook site.yml -i hosts -l aws-ec2 --tags httpd-conf --check  
 $ ansible-playbook site.yml -i hosts -l aws-ec2 --tags nginx --check  
 $ ansible-playbook site.yml -i hosts -l aws-ec2 --tags nginx-conf --check  
+#php
+$ ansible-playbook site.yml -i hosts -l aws-ec2 --tags php --check  
+
 #--checkはdry run
