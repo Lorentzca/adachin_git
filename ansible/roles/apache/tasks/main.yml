@@ -1,16 +1,8 @@
----
 - name: install yum packages
   yum: name={{ item }} state=latest
   with_items:
-- httpd
-- python-setuptools
-- php
-- php-pear 
-- php-mysql
-- php-mbstring
-- php-gd 
-- php-mcrypt 
-- php-pecl-apc
+  - httpd24
+  - python-setuptools
 
 - name: install easy_install package
   easy_install: name=pip
@@ -19,11 +11,23 @@
   pip: name=httplib2
 
 - name: copy index.html
-  copy: src=centos/index.html dest=/var/www/html
+  copy: src=roles/apache/files/index.html dest=/var/www/html
 
 - name: start httpd
+  sudo: True
   service: name=httpd enabled=yes state=started
 
 - name: check httpd is working
   uri: url=http://localhost/
 
+- name: apache adachin.conf
+  file: path=/var/www/adachin state=directory owner=root group=root mode=0755
+
+- name: apache stage.conf
+  file: path=/var/www/stage state=directory owner=root group=root mode=0755
+
+- name: apache log adachin.conf
+  file: path=/var/log/httpd/adachin state=directory owner=root group=root 
+
+- name: apache log stage.conf
+  file: path=/var/log/httpd/stage state=directory owner=root group=root 

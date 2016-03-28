@@ -7,8 +7,8 @@
     owner: root
     group: root
   with_items:
-    - { src: roles/apache/files/nginx.conf, dest: . }
+    - { src: roles/apache/files/httpd.conf, dest: . }
+    - { src: roles/apache/files/conf.d/gmo-ccg.conf, dest: conf.d/adachin.conf }
     - { src: roles/apache/files/conf.d/stage.conf, dest: conf.d/stage.conf }
-    - { src: roles/apache/files/conf.d/adachin.conf, dest: conf.d/adachin.conf }
   tags:
     - httpd-conf
