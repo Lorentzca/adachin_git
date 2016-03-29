@@ -12,7 +12,9 @@
     - php56-xml
     - php56-mysqlnd
 
-#- name: test phpfile
-#  shell: "echo '<?php phpinfo() ?>' > /var/www/html/info.php"
-#  args:
-#  creates: "/var/www/gmo-ccg/info.php"
+- name: copy phpinfo.php
+  copy: src=roles/php/files/phpinfo.php dest=/var/www/gmo-ccg
+
+#- name: change php time-zone
+#  sudo: True
+#  replace: dest=/etc/php.ini regexp="^;date\.timezone =" replace="date.timezone = Asia/Tokyo" backup=yes
