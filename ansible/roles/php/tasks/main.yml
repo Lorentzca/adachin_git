@@ -1,36 +1,16 @@
-#-name: php yum repository
-# copy:
-#  src: yum.repos.d/php.repo
-#  dest: /etc/yum.repos.d
-#  mode: 0644
-#  owner: root
-#  group: root
-
-#- name: Install php
-#  sudo: True
-#  yum: name={{ item }} state=present enablerepo=php
-#  with_items:
-#- php-cli
-#- php-pear
-#- php-mysql
-#- php-mbstring
-#- php-gd
-#- php-mcrypt
-#- php-pecl-apc
-
+---
 - name: install php
-  yum: pkg={{ item }} state=installed enablerepo=remi,remi-php56
+  sudo: True
+  yum: name={{item}}
   with_items:
-    - php
-    - php-devel
-    - php-mysqlnd
-    - php-mbstring
-    - php-gd
-    - php-cli
-    - php-dbg
-    - php-pecl-xdebug
-    - php-pear
-    - php-pecl-mailparse
+    - php56
+    - json-c
+    - php56-cli
+    - php56-common
+    - php56-jsonc
+    - php56-process
+    - php56-xml
+    - php56-mysqlnd
 
 #- name: test phpfile
 #  shell: "echo '<?php phpinfo() ?>' > /var/www/html/info.php"
