@@ -59,7 +59,7 @@
     dest: /etc/rc.d/rc.local
     create: no
     block: |
-      dd if=/dev/zero of=/media/ephemeral0/swapfile bs=1M count=10240;
+      dd if=/dev/zero of=/media/ephemeral0/swapfile bs=1M count=1024;
       chmod 600 /media/ephemeral0/swapfile;
       mkswap /media/ephemeral0/swapfile;
       swapon /media/ephemeral0/swapfile;
