@@ -38,26 +38,11 @@
     backup: yes
     dest: /etc/security/limits.conf
 
-#- name: check swapfile
-#  stat: path=/data/swapfile
-#  register: swap
-
-#- name: create 10GB swap if swapfile not exists
-#  shell: >
-#    dd if=/dev/zero of=/media/ephemeral0/swapfile bs=1M count=10240;
-#    chmod 600 /data/swapfile;
-#    mkswap /data/swapfile;
-#    swapon /data/swapfile;
-#  when: not swap.stat.exists
-
-#- lineinfile:
-#    dest: /etc/fstab
-#    line: /data/swapfile   swap        swap    defaults        0   0
 
 - name: /etc/rc.d/rc.local create swap
   blockinfile:
     dest: /etc/rc.d/rc.local
-    create: no
+    create: yes
     block: |
       dd if=/dev/zero of=/media/ephemeral0/swapfile bs=1M count=1024;
       chmod 600 /media/ephemeral0/swapfile;
