@@ -11,10 +11,14 @@
     - php56-process
     - php56-xml
     - php56-mysqlnd
+    - php56-gd
+    - php56-devel
+    - ImageMagick
+    - ImageMagick-devel
 
 - name: copy phpinfo.php
   copy: src=roles/php/files/phpinfo.php dest=/var/www/gmo-ccg
 
-#- name: change php time-zone
-#  sudo: True
-#  replace: dest=/etc/php.ini regexp="^;date\.timezone =" replace="date.timezone = Asia/Tokyo" backup=yes
+- name: change php time-zone
+  sudo: True
+  replace: dest=/etc/php.ini regexp="^;date\.timezone =" replace="date.timezone = Asia/Tokyo" backup=yes
