@@ -29,8 +29,3 @@
 - name: apache stage.conf
   file: path=/var/www/stage state=directory owner=root group=root mode=0755
 
-- name: apache log adachin.conf
-  file: path=/var/log/httpd/adachin state=directory owner=root group=root 
-
-- name: apache log stage.conf
-  file: path=/var/log/httpd/stage state=directory owner=root group=root 
