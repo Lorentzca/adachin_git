@@ -8,6 +8,7 @@ RUN yum install -y curl
 RUN yum install -y epel-release
 RUN yum install -y sendmail
 RUN yum install -y cronie-noanacron
+RUN yum install -y ntp
 RUN rpm -ivh http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm
 RUN yum install -y nginx
 RUN /etc/init.d/nginx start
@@ -34,7 +35,7 @@ RUN chmod 600 ~/.ssh/authorized_keys
 
 
 # Port
-EXPOSE 22 80
+EXPOSE 22 80 8080 3306
 
 # echo running
 CMD ["echo", "running!"]
