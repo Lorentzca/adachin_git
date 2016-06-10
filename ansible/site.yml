@@ -20,14 +20,4 @@
     - include: roles/apache/tasks/conf.yml
       tags: httpd-conf
 
-#- hosts: tag_ansible_role_ohta_isan
-#  remote_user: ec2-user
-#  become: True
-#  become_user: root
-#  pre_tasks:
-#    - include: roles/common/tasks/hostname.yml
-#      tags: common
-#  roles:
-#    - { role: nginx, tags: 'nginx' }
-#    - { role: sshd, tags: 'sshd' }
 
