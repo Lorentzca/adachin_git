@@ -1,0 +1,19 @@
+---
+- hosts: docker01
+ become: yes
+ remote_user: docker
+ tasks:
+     - name: deploy centos container
+     docker: image=centos:centos6 name=test-container ports=80:80 expose=80 tty=yes
+ 
+- hosts: test-container
+ connection: docker #Docker Connection Pluginを使用する場合は挿入
+   roles:
+     - { role: common, tags: 'common' }
+     - { role: nginx, tags: 'nginx' }
+     - { role: sshd, tags: 'sshd' }
+   tasks:
+     - include: roles/common/tasks/user.yml
+       tags: common
+     - include: roles/nginx/tasks/conf.yml
+       tags: nginx-conf
