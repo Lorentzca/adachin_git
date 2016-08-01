@@ -8,10 +8,10 @@
  
 - hosts: test-container
  connection: docker #Docker Connection Pluginを使用する場合は挿入
-   roles:
-     - { role: common, tags: 'common' }
-     - { role: nginx, tags: 'nginx' }
-     - { role: sshd, tags: 'sshd' }
+#   roles:
+#     - { role: common, tags: 'common' }
+#     - { role: nginx, tags: 'nginx' }
+#     - { role: sshd, tags: 'sshd' }
    tasks:
      - include: roles/common/tasks/user.yml
        tags: common
