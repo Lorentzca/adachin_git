@@ -31,6 +31,7 @@
     - tmux
     - tree
     - zsh
+    - zabbix
 
 - name: limits.conf
   copy:
