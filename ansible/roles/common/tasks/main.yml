@@ -28,10 +28,28 @@
 - name: install common packages
   yum: name={{ item }} state=latest
   with_items:
-    - tmux
-    - tree
-    - zsh
-    - zabbix
+        - gcc
+        - zlib-devel
+        - openssl-devel
+        - sqlite
+        - sqlite-devel
+        - mysql-devel
+        - libffi-devel
+        - ruby-devel
+        - rubygems
+        - readline-devel
+        - pcre
+        - pcre-devel
+        - git
+        - vim
+        - tree
+        - zsh
+        - ImageMagick
+        - sudo
+        - zabbix-agent
+        - zabbix
+        - htop
+
 
  #ruby
 - shell: echo 'export PATH="/root/.rbenv/bin:$PATH"' >> /root/.bashrc
