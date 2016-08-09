@@ -13,6 +13,10 @@
 #     - { role: nginx, tags: 'nginx' }
 #     - { role: sshd, tags: 'sshd' }
    tasks:
+     - include: roles/common/tasks/yum_update.yml
+        tags: yum_update.yml
+     - include: roles/common/tasks/yum_repos.yml
+      tags: yum_repos.yml
      - include: roles/common/tasks/user.yml
        tags: common
      - include: roles/nginx/tasks/conf.yml
