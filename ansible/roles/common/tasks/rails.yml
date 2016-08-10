@@ -1,0 +1,11 @@
+# gem install root
+   - shell: sudo -u root /root/.rbenv/shims/gem update --system
+     sudo: no
+   - shell: sudo -u root /root/.rbenv/shims/gem install --no-ri --no-rdoc rails
+     sudo: no
+   - shell: sudo -u root /root/.rbenv/shims/gem install bundler
+     sudo: no
+   - shell: sudo -u root /root/.rbenv/bin/rbenv rehash
+     sudo: no
+
+
