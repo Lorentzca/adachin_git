@@ -1,6 +1,6 @@
 ---
 - user:
-    name: adachi
+    name: adachin
     generate_ssh_key: yes
     shell: /bin/bash
     groups: wheel
