@@ -9,5 +9,6 @@
   with_items:
     - { src: roles/nginx/files/nginx.conf, dest: . }
     - { src: roles/nginx/files/conf.d/default.conf, dest: conf.d/ }
+    - { src: roles/nginx/files/conf.d/sites-enabled/, dest: sites-enabled/ }
   tags:
     - nginx-conf
