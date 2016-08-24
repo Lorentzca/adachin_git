@@ -1,23 +1,45 @@
 ---
+- name: Add Remi repository 'php-repo'
+  yum: name=http://rpms.famillecollet.com/enterprise/remi-release-7.rpm state=present
+
 - name: install php
-  sudo: True
-  yum: name={{item}}
+  yum: pkg={{item}} state=present enablerepo=remi,remi-php56
   with_items:
-    - php56
+    - php
+    - php-devel
+    - php-mysqlnd
+    - php-mbstring
+    - php-gd
+    - php-cli
+    - php-dbg
+    - php-pecl-xdebug
+    - php-pear
+    - php-pecl-mailparse
+
+#- name: Add repository 'php-mecab'
+#  yum: name=http://packages.groonga.org/centos/groonga-release-1.1.0-1.noarch.rpm
+
+- name: install php-mecab
+ # yum: name={{item}}
+  yum: name={{item}} state=latest
+  with_items:
+    - mecab
+    - mecab-ipadic
+    - mecab-devel
+    - php-mecab
     - json-c
-    - php56-cli
-    - php56-common
-    - php56-jsonc
-    - php56-process
-    - php56-xml
-    - php56-mysqlnd
-    - php56-gd
-    - php56-devel
-    - ImageMagick
+    - php-common
+    - php-jsonc
+    - php-process
+    - php-xml
+    - php-pdo
+    - php-devel
+    - php-mysql
+    - php-redis
     - ImageMagick-devel
 
 - name: copy phpinfo.php
-  copy: src=roles/php/files/phpinfo.php dest=/var/www/gmo-ccg
+  copy: src=roles/php/files/phpinfo.php dest=/var/www
 
 - name: change php time-zone
   sudo: True
