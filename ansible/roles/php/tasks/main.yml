@@ -16,27 +16,31 @@
     - php-pear
     - php-pecl-mailparse
 
-#- name: Add repository 'php-mecab'
-#  yum: name=http://packages.groonga.org/centos/groonga-release-1.1.0-1.noarch.rpm
+- name: Add repository 'php-mecab'
+  yum: name=http://packages.groonga.org/centos/groonga-release-1.1.0-1.noarch.rpm state=present
 
 - name: install php-mecab
  # yum: name={{item}}
-  yum: name={{item}} state=latest
+  yum: name={{item}} state=latest enablerepo=groonga
   with_items:
     - mecab
     - mecab-ipadic
     - mecab-devel
     - php-mecab
-    - json-c
+
+- name: install php-more
+  yum: name={{item}} state=latest
+  with_items:
     - php-common
-    - php-jsonc
-    - php-process
-    - php-xml
-    - php-pdo
     - php-devel
     - php-mysql
     - php-redis
-    - ImageMagick-devel
+
+- name: install composer
+  shell: curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin
+
+- name: move composer.phar to composer
+  command: mv /usr/bin/composer.phar /bin/composer
 
 - name: copy phpinfo.php
   copy: src=roles/php/files/phpinfo.php dest=/var/www
