@@ -1,7 +1,7 @@
 ---
-- user:
+- name: create user
+  user:
     name: adachin
-    generate_ssh_key: yes
+    password: "{{ 'adachindayo' | password_hash('sha512') }}"
     shell: /bin/bash
-    groups: wheel
-
+    group: wheel
