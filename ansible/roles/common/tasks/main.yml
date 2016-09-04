@@ -28,7 +28,7 @@
 - name: install common packages
   yum: name={{ item }} state=latest
   with_items:
-        - gcc
+        - gcc*
         - zlib-devel
         - openssl-devel
         - sqlite
