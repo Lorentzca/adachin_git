@@ -5,9 +5,10 @@
  tasks:
      - name: deploy centos container
      docker: image=centos:centos6 name=test-container ports=80:80 expose=80 tty=yes
+	  docker: image=centos:7 name=test-container privileged=yes  ports=7070:7070 expose=80 tty=yes command=/sbin/init
  
 - hosts: test-container
- connection: docker #Docker Connection Pluginを使用する場合は挿入
+ connection: docker
 #   roles:
 #     - { role: common, tags: 'common' }
 #     - { role: nginx, tags: 'nginx' }
