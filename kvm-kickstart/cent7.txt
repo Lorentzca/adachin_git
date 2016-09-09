@@ -1,0 +1,24 @@
+### 1. make Disk Imange
+qemu-img create -f qcow2 /var/lib/libvirt/images/devcon7.qcow2 20G
+
+### 2. install and boot guest server
+virt-install \
+--connect qemu:///system \
+--name devcon7 \
+--vcpus=2 \
+--ram=2048 \
+--hvm \
+--disk path=/var/lib/libvirt/images/devcon7.qcow2 \
+--network bridge=br219 \
+--network bridge=br999 \
+--nographics \
+--os-type=Linux \
+--os-variant=virtio26 \
+--location='/var/tmp/CentOS-7-x86_64-DVD-1511.iso' \
+--initrd-inject=/var/tmp/devcon7.cfg \
+--extra-args='ks=file:/devcon7.cfg console=tty0 console=ttyS0,115200n8'
+
+
+## delete guestSV
+virsh destroy devcon7; virsh undefine devcon7
+
