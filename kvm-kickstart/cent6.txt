@@ -1,22 +1,20 @@
 1. make disk image
-qemu-img create -f qcow2 /var/lib/libvirt/images/test01.qcow2 150G
+qemu-img create -f qcow2 /var/lib/libvirt/images/cent6.qcow2 150G
 
 virt-install \
 --connect qemu:///system \
---name test01 \
+--name cent6 \
 --vcpus=2 \
 --ram=8192 \
 --hvm \
---disk path=/var/lib/libvirt/images/test01.qcow2 \
---network bridge=br50 \
---network bridge=br126 \
---network bridge=br127 \
+--disk path=/var/lib/libvirt/images/cent6.qcow2 \
+--network bridge=br219 \
 --nographics \
 --os-type=Linux \
 --os-variant=virtio26 \
 --location='/var/tmp/CentOS-6.6-x86_64-bin-DVD1.iso' \
---initrd-inject=/var/tmp/dev01.cfg \ #読み込み
---extra-args='ks=file:/test01.cfg console=tty0 console=ttyS0,115200n8'
+--initrd-inject=/var/tmp/cent6.cfg \ 
+--extra-args='ks=file:/cent6.cfg console=tty0 console=ttyS0,115200n8'
 
 ## delete guestSV
-virsh destroy test01; virsh undefine dev01
+virsh destroy cent6; virsh undefine cent6
