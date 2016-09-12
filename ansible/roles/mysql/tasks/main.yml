@@ -1,0 +1,16 @@
+---
+- name: Add repository 'mysql-repo'
+  yum: name=http://dev.mysql.com/get/mysql57-community-release-el7-7.noarch.rpm state=present
+
+- name: remove the MariaDB package
+  yum: name=mariadb-libs state=absent
+
+- name: install mysql
+  sudo: True
+  yum: name={{item}}
+  with_items:
+    - mysql-community-server
+    - mysql
+    - mysql-devel
+    - mysql-server
+    - mysql-utilities
