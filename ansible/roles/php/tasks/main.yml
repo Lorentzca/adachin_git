@@ -42,42 +42,42 @@
   replace: dest=/etc/php.ini regexp="^;date\.timezone =" replace="date.timezone = Asia/Tokyo" backup=yes
 
 - name: download php-mecab
-get_url:  
-  url: https://github.com/rsky/php-mecab/archive/master.zip
-  dest: /tmp
+  get_url:
+   url: https://github.com/rsky/php-mecab/archive/master.zip
+   dest: /tmp/
 
 - name: untar php-mecab source archive
   unarchive:
-  src: /tmp/master.zip
-  dest: /tmp
-  copy: no
+   src: /tmp/master.zip
+   dest: /tmp
+   copy: no
 
 - name: phpize
   shell: phpize
   args:
-  chdir: /tmp/php-mecab-master/mecab
+   chdir: /tmp/php-mecab-master/mecab
 
 - name: configure php-mecab
   shell: >-
-    ./configure
+     ./configure
   args:
-  chdir: /tmp/php-mecab-master/mecab
+   chdir: /tmp/php-mecab-master/mecab
 
 - name: configure php-mecab config
   shell: >-
-    ./configure --with-php-config=/usr/bin/php-config --with-mecab=/usr/local/bin/mecab-config
+     ./configure --with-php-config=/usr/bin/php-config --with-mecab=/usr/local/bin/mecab-config
   args:
-  chdir: /tmp/php-mecab-master/mecab
+   chdir: /tmp/php-mecab-master/mecab
 
 - name: make php-mecab from source
   shell: make
   args:
-    chdir: /tmp/php-mecab-master/mecab
+   chdir: /tmp/php-mecab-master/mecab
 
 - name: make install php-mecab
-  shell: >-
-    make install 
-    chdir: /tmp/php-mecab-master/mecab
+  shell: make install
+  args:
+   chdir: /tmp/php-mecab-master/mecab
 
 - name: ln php-mecab
   shell: ln -s /usr/lib64/php/modules/mecab.so /etc/php.d
