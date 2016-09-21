@@ -4,7 +4,7 @@
     name: adachin
     password: "{{ 'adachindayo' | password_hash('sha512') }}"
     shell: /bin/bash
-    group: wheel
+    groups: wheel
 
 - name: authorized_key for user
   authorized_key:
