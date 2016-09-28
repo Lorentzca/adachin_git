@@ -1,0 +1,6 @@
+---
+    - name: install package keepalived
+      yum: name={{ item }} state=installed
+      with_items:
+        - ipvsadm
+        - keepalived

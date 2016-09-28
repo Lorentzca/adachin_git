@@ -1,0 +1,12 @@
+---
+- name: LB-conf copy /etc/keepalived
+  copy:
+    src: "{{ item.src }}"
+    dest: "/etc/keepalived/{{ item.dest }}"
+    backup: yes
+    owner: root
+    group: root
+  with_items:
+    - { src: "roles/keepalived/files/{{ inventory_hostname }}-MASTER", dest: . }
+    - { src: "roles/keepalived/files/{{ inventory_hostname }}-BACKUP", dest: . }
+
