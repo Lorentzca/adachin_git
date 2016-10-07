@@ -1,5 +1,8 @@
-# file: hosts
+[docker_host]
+docker01
 
-[aws-ec2]
-hostname ansible_ssh_host=IP
+[lvs]
+lvs01
 
+[web]
+web01

@@ -4,21 +4,21 @@
  remote_user: docker
  tasks:
      - name: deploy centos container
-     docker: image=centos:centos6 name=test-container ports=80:80 expose=80 tty=yes
-	  docker: image=centos:7 name=test-container privileged=yes  ports=7070:7070 expose=80 tty=yes command=/sbin/init
+	  docker: image=centos:7 name=nginx privileged=yes  ports=7070:7070 expose=80 tty=yes command=/sbin/init
+#      docker: image=centos:6 name=manage-test01 privileged=yes  ports=7070:7070 expose=80 tty=yes command=/sbin/init
  
-- hosts: test-container
+- hosts: web01
  connection: docker
-#   roles:
-#     - { role: common, tags: 'common' }
-#     - { role: nginx, tags: 'nginx' }
-#     - { role: sshd, tags: 'sshd' }
    tasks:
      - include: roles/common/tasks/yum_update.yml
-        tags: yum_update.yml
+        tags: update
      - include: roles/common/tasks/yum_repos.yml
-      tags: yum_repos.yml
+      tags: repos
+     - include: roles/common/tasks/user.yml
+      tags: user
      - include: roles/common/tasks/user.yml
        tags: common
+     - include: roles/nginx/tasks/main.yml
+       tags: nginx-install
      - include: roles/nginx/tasks/conf.yml
        tags: nginx-conf
