@@ -1,0 +1,6 @@
+---
+- name: couch-base4.10 Download
+   get_url: url="http://packages.couchbase.com/releases/4.1.0/couchbase-server-community-4.1.0-centos7.x86_64.rpm" dest=/tmp
+
+- name: couch-base-install
+   shell: rpm ivh /tmp/couchbase-server-community-4.1.0-centos7.x86_64.rpm
