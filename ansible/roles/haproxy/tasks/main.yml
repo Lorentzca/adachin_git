@@ -1,0 +1,6 @@
+- name: Install haproxy
+  sudo: True
+  yum: name={{ item }} state=present enablerepo=nginx
+  with_items:
+    - haproxy
+
