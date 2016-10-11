@@ -36,23 +36,23 @@ defaults
 
 
 ### HTTP
-frontend http_deliver
+frontend http_server
     bind    *:80
-    default_backend http:deliver
+    default_backend http:server
 
-backend http:deliver
+backend http:server
     mode    http
     option  httplog clf
     option  httpchk
     option  log-health-checks
     option  forwardfor
     option  forceclose
-    server  sp-ad-deliver17 10.0.2.12:80 weight 50 check inter 5000 rise 2 fall 1
+    server  server 10.0.2.12:80 weight 50 check inter 5000 rise 2 fall 1
     errorfile 503 /etc/haproxy/errorfiles/503.html
 
 
 ### HTTPS
-frontend https_deliver
+frontend https_server
     mode    http
     bind    *:443 #ssl crt /etc/pki/tls/private/xxx.jp.pem
     http-request add-header X_HTTPS on
