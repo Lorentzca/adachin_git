@@ -1,14 +1,13 @@
-#!/bin/bash
-VERSIONS=${VERSIONS:-"2.7.8.10"}
+SIONS=${VERSIONS:-"2.7.8.10"}
 
 # make directory
-mkdir -p /bin
-cd /bin
+mkdir -p /opt/bin
+cd /opt/bin
 
 wget http://downloads.activestate.com/ActivePython/releases/${VERSIONS}/ActivePython-${VERSIONS}-linux-x86_64.tar.gz
 tar -xzvf ActivePython-${VERSIONS}-linux-x86_64.tar.gz
 
-mv ActivePython-${VERSIONS}-linux-x86_64 apy && cd apy && ./install.sh -I /bin/python/
+mv ActivePython-${VERSIONS}-linux-x86_64 apy && cd apy && ./install.sh -I /opt/bin/python/
 
 ln -s /opt/python/bin/easy_install /bin/easy_install
 ln -s /opt/python/bin/pip /bin/pip
