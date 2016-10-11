@@ -1,4 +1,4 @@
-SIONS=${VERSIONS:-"2.7.8.10"}
+VERSIONS=${VERSIONS:-"2.7.8.10"}
 
 # make directory
 mkdir -p /opt/bin
