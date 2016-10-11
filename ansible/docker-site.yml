@@ -1,21 +1,21 @@
 ---
 - hosts: docker01
- become: yes
- remote_user: docker
- tasks:
-     - name: deploy centos container
-	  docker: image=centos:7 name=nginx privileged=yes  ports=7070:7070 expose=80 tty=yes command=/sbin/init
-#      docker: image=centos:6 name=manage-test01 privileged=yes  ports=7070:7070 expose=80 tty=yes command=/sbin/init
+  become: yes
+  remote_user: docker
+  tasks:
+    - name: deploy centos container
+      docker: image=centos:7 name=web01 privileged=yes  ports=7070:7070 expose=80 tty=yes command=/sbin/init
+#      docker: image=centos:6 name=LB-test01 ports=7070:7070 expose=80 tty=yes
  
 - hosts: web01
- connection: docker
-   tasks:
+  connection: docker
+  tasks:
      - include: roles/common/tasks/yum_update.yml
-        tags: update
+       tags: update
      - include: roles/common/tasks/yum_repos.yml
-      tags: repos
+       tags: repos
      - include: roles/common/tasks/user.yml
-      tags: user
+       tags: user
      - include: roles/common/tasks/user.yml
        tags: common
      - include: roles/nginx/tasks/main.yml
