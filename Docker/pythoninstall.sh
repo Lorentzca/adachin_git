@@ -14,3 +14,5 @@ ln -s /opt/python/bin/easy_install /opt/bin/easy_install
 ln -s /opt/python/bin/pip /opt/bin/pip
 ln -s /opt/python/bin/python /opt/bin/python
 ln -s /opt/python/bin/virtualenv /opt/bin/virtualenv
+ln -s /opt/python/bin/python /bin/python
+ln -s /opt/python/bin/pip /bin/pip
