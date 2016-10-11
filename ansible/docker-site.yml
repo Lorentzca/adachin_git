@@ -12,12 +12,12 @@
   tasks:
      - include: roles/common/tasks/yum_update.yml
        tags: update
-     - include: roles/common/tasks/yum_repos.yml
+     - include: roles/common/tasks/yum_repos7.yml
        tags: repos
+     - include: roles/common/tasks/main.yml
+       tags: main
      - include: roles/common/tasks/user.yml
        tags: user
-     - include: roles/common/tasks/user.yml
-       tags: common
      - include: roles/nginx/tasks/main.yml
        tags: nginx-install
      - include: roles/nginx/tasks/conf.yml
