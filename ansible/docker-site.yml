@@ -4,8 +4,8 @@
   remote_user: docker
   tasks:
     - name: deploy centos container
-      docker: image=centos:7 name=web01 privileged=yes  ports=7070:7070 expose=80 tty=yes command=/sbin/init
-#      docker: image=centos:6 name=LB-test01 ports=7070:7070 expose=80 tty=yes
+      docker: image=centos:7 name=web01 privileged=yes  ports=70:70 expose=70 tty=yes command=/sbin/init
+#      docker: image=centos:6 name=LB-test01 ports=70:70 expose=70 tty=yes
  
 - hosts: web01
   connection: docker
