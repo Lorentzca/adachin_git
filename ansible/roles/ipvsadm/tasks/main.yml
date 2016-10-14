@@ -1,0 +1,14 @@
+---
+  - name: install package keepalived
+    yum: name={{ item }} state=installed
+    with_items:
+          - ipvsadm
+
+  - name: copy sysctl.conf
+    copy: src=roles/keepalived/files/sysctl.conf dest=/etc/sysctl.conf owner=root group=root mode=0644
+
+  - name: touch ipvsadm in /etc/sysconfig
+    file: path=/etc/sysconfig/ipvsadm state=touch owner=root group=root mode=644
+
+  - name: start ipvsadm service and chkconfig on
+    service: name=ipvsadm state=started enabled=on
