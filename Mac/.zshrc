@@ -39,6 +39,7 @@ setopt transient_rprompt
 # エイリアスいろいろ
 export LSCOLORS=gxfxcxdxbxegedabagacad
 alias ls='ls -F --color'
+alias ls="ls -FHG" #Mac
 alias ll='ls -Fl'
 alias la='ls -Fla'
 alias v='vim -R'
