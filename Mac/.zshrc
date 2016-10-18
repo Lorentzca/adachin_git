@@ -18,7 +18,8 @@ setopt auto_menu
 setopt auto_param_keys
 setopt complete_in_word
 setopt always_last_prompt
-
+setopt magic_equal_subst
+zstyle ':completion:*:default' menu select=2
 
 
 # エイリアスいろいろ
