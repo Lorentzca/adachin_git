@@ -13,12 +13,18 @@ local p_info="%F{yellow}%n@%m%f > "
 PROMPT="$p_current$p_info"
 RPROMPT='%F{yellow}[%D]%f'
 setopt transient_rprompt
+setopt auto_param_slash
+setopt auto_menu
+setopt auto_param_keys
+setopt complete_in_word
+setopt always_last_prompt
+
 
 
 # エイリアスいろいろ
 export LSCOLORS=gxfxcxdxbxegedabagacad
 alias ls='ls -F --color'
-alias ls="ls -FHG" #Mac
+#alias ls="ls -FHG" #Mac
 alias ll='ls -Fl'
 alias la='ls -Fla'
 alias v='vim -R'
