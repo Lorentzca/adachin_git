@@ -23,9 +23,7 @@
 - name: apache sites-enabled
   file: path=/etc/httpd/sites-enabled state=directory owner=root group=root mode=0755
 
-- name: apache adachin.conf
-  file: path=/var/www/adachin state=directory owner=root group=root mode=0755
-
-- name: apache stage.conf
-  file: path=/var/www/stage state=directory owner=root group=root mode=0755
-
+- file: path=/var/www/{{ item.name }} state=directory owner=root group=root mode=0755
+  with_items:
+        - { name: 'adachin' }
+        - { name: 'stage' }

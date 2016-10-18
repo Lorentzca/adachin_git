@@ -8,7 +8,10 @@
     group: root
   with_items:
     - { src: roles/nginx/files/nginx.conf, dest: . }
-#    - { src: roles/nginx/files/conf.d/default.conf, dest: conf.d/ }
     - { src: roles/nginx/files/sites-enabled/, dest: sites-enabled/ }
-  tags:
-    - nginx-conf
+
+- file: path=/var/www/{{ item.name }} state=directory owner=root group=root mode=0755
+  with_items:
+        - { name: 'adachin' }
+        - { name: 'stage' }
+
