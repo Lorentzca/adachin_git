@@ -1,0 +1,16 @@
+#!/bin/zsh
+
+ts=`date +%s`
+typeset -A stats
+
+stats[total_conns]=$(sed -n -e 3p /proc/net/ip_vs_stats | awk '{print "ibase=16;" $1}' | bc)
+stats[incoming_pkts]=$(sed -n -e 3p /proc/net/ip_vs_stats | awk '{print "ibase=16;" $2}' | bc)
+stats[outgoing_pkts]=$(sed -n -e 3p /proc/net/ip_vs_stats | awk '{print "ibase=16;" $3}' | bc)
+stats[incoming_bytes]=$(sed -n -e 3p /proc/net/ip_vs_stats | awk '{print "ibase=16;" $4}' | bc)
+stats[outgoing_bytes]=$(sed -n -e 3p /proc/net/ip_vs_stats | awk '{print "ibase=16;" $5}' | bc)
+
+for k in "${(@k)stats}"; do
+    #echo "$k -> $stats[$k]"
+    echo {{ collectd_prefix }}{{ inventory_hostname }}.ipvs.$k $stats[$k] $ts | nc -w 5 {{ graphite_host }} 2003
+
+done

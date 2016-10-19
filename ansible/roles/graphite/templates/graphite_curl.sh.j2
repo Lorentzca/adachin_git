@@ -1,0 +1,43 @@
+#!/bin/zsh
+
+ts=`date +%s`
+host="{{ inventory_hostname }}"
+graphite="{{ graphite_host }}"
+ua="Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.76 Mobile Safari/537.36"
+header=""
+url=""
+format="TotalTime:%{time_total} dns:%{time_namelookup} 1st-byte:%{time_starttransfer} Connect:%{time_connect} http_code:%{http_code}"
+label=""
+
+local -A opthash
+zparseopts -D -A opthash -- H: A: U: L:
+
+if [[ -n "${opthash[(i)-H]}" ]]; then
+    header=${opthash[-H]}
+fi
+if [[ -n "${opthash[(i)-A]}" ]]; then
+    ua=${opthash[-A]}
+fi
+if [[ -n "${opthash[(i)-U]}" ]]; then
+    url=${opthash[-U]}
+fi
+if [[ -n "${opthash[(i)-L]}" ]]; then
+    label=${opthash[-L]}
+fi
+
+metrics=(`curl -m 10 -s -A $ua -H $header -w $format $url`)
+
+counter=0
+for i in $metrics; do
+    name=`echo $i | cut -d':' -f1`
+    metric=`echo $i | cut -d':' -f2`
+    if [ $counter = 0 ]; then
+        let counter++
+        #echo "\nts: $ts"
+        #echo "response_data: $i"
+        continue;
+    fi
+    #echo $i
+    echo "{{ collectd_prefix }}${host}.curl.$label.$name $metric $ts" | nc -w 5 $graphite 2003
+    let counter++
+done

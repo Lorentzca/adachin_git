@@ -1,0 +1,49 @@
+#!/bin/zsh
+
+graphite="{{ graphite_host }}"
+ts=`date +%s`
+
+local -A opthash
+zparseopts -D -A opthash -- H:
+if [[ -n "${opthash[(i)-H]}" ]]; then
+    host=${opthash[-H]}
+else
+    exit 0
+fi
+
+function send_metrics() {
+    counter=1
+    for v in $metrics; do
+        echo "{{ collectd_prefix }}${host}.jmx.$labels[$counter] $v $ts" | nc -w 5 $graphite 2003
+        let counter++
+    done
+}
+
+# ThreadPool
+labels=(currentThreadCount currentThreadsBusy)
+JMXTERM_CMD="get -s -b name=http-8080,type=ThreadPool -d Catalina $labels"
+metrics=(`echo $JMXTERM_CMD | java -jar /usr/local/bin/jmxterm.jar -l ${host}:7900 -v silent -n`)
+send_metrics
+
+# GlobalRequestProcessor
+labels=(bytesReceived bytesSent errorCount processingTime requestCount)
+JMXTERM_CMD="get -s -b name=http-8080,type=GlobalRequestProcessor -d Catalina $labels"
+metrics=(`echo $JMXTERM_CMD | java -jar /usr/local/bin/jmxterm.jar -l ${host}:7900 -v silent -n`)
+send_metrics
+
+
+JMXTERM_CMD="get -s -b java.lang:type=Memory HeapMemoryUsage"
+metrics=(`echo $JMXTERM_CMD | java -jar /usr/local/bin/jmxterm.jar -l ${host}:7900 -v silent -n`)
+metrics=`echo $metrics | tr -d '{}'`
+commited=`echo $metrics | awk -F\; '{print $1}'`
+v=`echo $commited | awk -F= '{print $2}'`
+echo "{{ collectd_prefix }}${host}.jmx.heapmemory.commited $v $ts" | nc -w 5 $graphite 2003
+init=`echo $metrics | awk -F\; '{print $2}'`
+v=`echo $init | awk -F= '{print $2}'`
+echo "{{ collectd_prefix }}${host}.jmx.heapmemory.init $v $ts" | nc -w 5 $graphite 2003
+max=`echo $metrics | awk -F\; '{print $3}'`
+v=`echo $max | awk -F= '{print $2}'`
+echo "{{ collectd_prefix }}${host}.jmx.heapmemory.max $v $ts" | nc -w 5 $graphite 2003
+used=`echo $metrics | awk -F\; '{print $4}'`
+v=`echo $used | awk -F= '{print $2}'`
+echo "{{ collectd_prefix }}${host}.jmx.heapmemory.used $v $ts" | nc -w 5 $graphite 2003

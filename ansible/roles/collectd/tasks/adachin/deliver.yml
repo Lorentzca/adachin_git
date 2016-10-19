@@ -1,0 +1,8 @@
+---
+- name: /opt/collectd/etc/collectd.d/deliver.conf
+  copy:
+    src: collectd.d/adachin/deliver.conf
+    dest: /opt/collectd/etc/collectd.d/
+    mode: 0644
+    backup: yes
+  notify: restart collectd

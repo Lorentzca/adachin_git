@@ -1,0 +1,83 @@
+---
+- stat: path=/opt/collectd/sbin/collectd
+  register: f
+
+- name: set collectd_include_dir
+  set_fact:
+    collectd_include_dir: /opt/collectd/etc/collectd.d
+
+- name: install required packages (centos6)
+  yum: name={{ item }} state=latest enablerepo=remi,epel
+  with_items:
+    - nc
+    - libcurl-devel
+    #- perl-devel
+    - gcc
+    - perl-ExtUtils-MakeMaker
+    - javac
+  when: 
+    - not f.stat.exists
+    - ansible_distribution_major_version == '6'
+
+- name: install required packages (centos5)
+  yum: name={{ item }} state=latest enablerepo=remi,epel
+  with_items:
+    - nc
+    #- libcurl-devel
+    #- perl-devel
+    - gcc
+    #- perl-ExtUtils-MakeMaker
+  when: 
+    - not f.stat.exists
+    - ansible_distribution_major_version == '5'
+
+- name: install collectd from source
+  shell: |
+    cd /tmp
+    wget http://collectd.org/files/collectd-5.6.0.tar.bz2
+    tar xjvf collectd-5.6.0.tar.bz2
+    cd collectd-5.6.0
+    ./configure --with-java=/usr/java/jdk1.8.0_91
+    make
+    make install
+  when: 
+    - not f.stat.exists
+    - "'drc' not in group_names"
+
+- name: install collectd from source with java support
+  shell: |
+    cd /tmp
+    wget http://collectd.org/files/collectd-5.6.0.tar.bz2
+    tar xjvf collectd-5.6.0.tar.bz2
+    cd collectd-5.6.0
+    ./configure --with-java=/usr/lib/jvm/java-1.8.0
+    make
+    make install
+  when: 
+    - not f.stat.exists
+    - "'drc' in group_names"
+
+- name: /etc/init.d/collectd
+  copy:
+    src: init.d-collectd
+    dest: /etc/init.d/collectd
+    mode: 0755
+    backup: no
+  when:
+    - ansible_distribution == 'CentOS' or
+      ansible_distribution == 'RedHat' # ad-deliver6
+    - ansible_distribution_major_version == '5' or
+      ansible_distribution_major_version == '6'
+
+- name: create directory /opt/collectd/etc/collectd.d
+  file:
+    name: /opt/collectd/etc/collectd.d
+    state: directory
+
+- name: collectd.conf
+  template:
+    src: collectd.conf.j2
+    dest: /opt/collectd/etc/collectd.conf
+    mode: 0644
+    backup: no
+  notify: restart collectd

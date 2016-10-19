@@ -1,0 +1,57 @@
+---
+#- name: create graphite log directory
+#  file:
+#    name: /var/log/graphite
+#    state: directory
+#    mode: 0755
+#    owner: spacyz
+
+#- name: /usr/local/bin/graphite_curl.sh
+#  template:
+#    src: roles/graphite/templates/graphite_curl.sh.j2
+#    dest: /usr/local/bin/graphite_curl.sh
+#    mode: 0755
+#    owner: root
+#    group: root
+
+#- name: /usr/local/bin/graphite_curl_lvs.sh
+#  copy:
+#    src: roles/graphite/files/graphite_curl_lvs.sh
+#    dest: /usr/local/bin/
+#    mode: 0755
+#    owner: root
+#    group: root
+
+#- name: /usr/local/bin/ipvs_stats.sh
+#  template:
+#    src: roles/graphite/templates/ipvs_stats.sh.j2
+#    dest: /usr/local/bin/ipvs_stats.sh
+#    mode: 0755
+#    owner: root
+#    group: root
+
+#- name: /etc/cron.d/graphite
+#  template:
+#    src: roles/graphite/files/cron/lvs
+#    dest: /etc/cron.d/graphite
+#    mode: 0644
+
+- name: /usr/local/bin/graphite_haproxy.sh
+  template:
+    src: roles/graphite/templates/graphite_haproxy.sh
+    dest: /usr/local/bin/
+    mode: 0755
+    owner: root
+    group: root
+
+- name: haproxy-monitor plugin
+  get_url:  
+    url: https://raw.githubusercontent.com/utada/HAP-Monitor/master/hap-monitor-cron.py
+    dest: /usr/local/bin/
+    mode: 0755
+
+- name: /etc/cron.d/graphite
+  template:
+    src: roles/graphite/templates/cron/lb
+    dest: /etc/cron.d/graphite
+    mode: 0644
