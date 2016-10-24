@@ -1,5 +1,6 @@
 ---
-- hosts: docker01
+#- hosts: docker01
+- hosts: web01
   become: yes
   remote_user: docker
   tasks:

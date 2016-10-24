@@ -59,3 +59,9 @@ function tm() {
            tmux new-session
        fi
 }
+
+if [ -x "`which go`" ]; then
+       export GOROOT=`go env GOROOT`
+       export GOPATH=$HOME/code/go-local
+       export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+ fi
