@@ -7,6 +7,7 @@ import (
     "fmt"
 
     config "checkhttp/config"
+    mail "checkhttp/libs"
 )
 
 func main() {
