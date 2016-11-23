@@ -65,3 +65,11 @@ if [ -x "`which go`" ]; then
        export GOPATH=$HOME/code/go-local
        export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
  fi
+
+#git
+alias g=git
+alias st=status
+alias ss=status -s
+alias sh=show
+alias ch=checkout
+alias br=branch
