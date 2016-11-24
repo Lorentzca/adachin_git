@@ -1,5 +1,0 @@
-[nginx]
-name=Nginx mainline repository
-baseurl=http://nginx.org/packages/mainline/centos/$releasever/$basearch/
-gpgcheck=0
-enabled=0

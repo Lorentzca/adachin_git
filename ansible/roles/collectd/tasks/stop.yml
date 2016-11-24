@@ -1,6 +1,0 @@
----
-- name: stop collectd service
-  service:
-    name: collectd
-    state: stopped
-

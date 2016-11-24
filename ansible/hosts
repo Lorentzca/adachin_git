@@ -1,8 +1,0 @@
-[docker_host]
-docker01
-
-[lvs]
-lvs01
-
-[web]
-web01

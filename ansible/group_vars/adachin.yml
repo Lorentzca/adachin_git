@@ -1,4 +1,0 @@
-graphite_host: adachin.com
-collectd_prefix: carbon.adachin.
-#ansible_become_pass: haha
-

@@ -1,6 +1,0 @@
-[php]
-name=php mainline repository
-baseurl=http://ftp.iij.ad.jp/pub/linux/fedora/epel/6/x86_64/epel-release-6-8.noarch.rpm
-baseurl=http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
-gpgcheck=0
-enabled=0
