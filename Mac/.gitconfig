@@ -12,3 +12,5 @@
     sh = show
     ch = checkout
     br = branch
+    co = commit
+    pu = push
