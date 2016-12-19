@@ -19,13 +19,14 @@ def lambda_handler(event, context):
     client.terminate_instances(
         InstanceIds=list
     )
+------
 
 #Keyがnodelete、Valueがtrue以外は削除
 # coding: utf-8
 import boto3
- 
-def lambda_handler(event, context):
-#if __name__ == '__main__': #EC2の場合 
+#
+##def lambda_handler(event, context):
+if __name__ == '__main__':
     client = boto3.client('ec2', "ap-northeast-1")
     resp = client.describe_instances()
     all_list = []
@@ -33,18 +34,17 @@ def lambda_handler(event, context):
     for reservation in resp['Reservations']:
       for instance in reservation['Instances']:
         all_list.append(instance['InstanceId'])
-        #print(all_list)
+#        print(all_list)
         if 'Tags' in instance:
-#        ###nodelete以外は削除
+##        ###nodelete以外は削除
           for tag in instance['Tags']:
             if tag['Key'] == 'nodelete' and tag['Value'] == 'true':
               del_list.append(instance['InstanceId'])
-    #print(del_list)
-#    set(all_list) - set(del_list)
-     diffset = set(all_list) - set(del_list)
-    print(diffset)
+#              print(del_list)
+    diffset = set(all_list) - set(del_list)
+#    print(diffset)
     targetlist = list(diffset)
-    print(targetlist)
+#    print(targetlist)
               ec2.terminate_instances(
-                InstanceIds=targetlist
+                InstanceIds=targetlist#              
               )
