@@ -1,4 +1,10 @@
-mport boto3
+# coding: utf-8
+#ELB delete
+import boto3
+
+# nodelete,trueを変数化
+ND = 'nodelete'
+TR = 'true'
 
 def lambda_handler(event, context):
 #if __name__ == '__main__':
@@ -16,12 +22,12 @@ def lambda_handler(event, context):
     for tag in resp2['TagDescriptions']:
 #     print tag
       if len(tag['Tags']) == 0:
-        print(elb['LoadBalancerName'])
+#        print(elb['LoadBalancerName'])
 # tagがnodelete以外を出力
         for k in tag['Tags']:
-          print k
-          if not k['Key'] == 'nodelete' and not k['Value'] == 'true':
-            print(elb['LoadBalancerName'])
+#          print k
+          if not k['Key'] == ND and not k['Value'] == TR:
+#            print(elb['LoadBalancerName'])
     response = client.delete_load_balancer(
         LoadBalancerName=elb['LoadBalancerName']
     )
@@ -43,12 +49,12 @@ def lambda_handler(event, context):
     for tag in resp2['TagDescriptions']:
 #       print tag
         if len(tag['Tags']) == 0:
-          print(alb['LoadBalancerArn'])
+#          print(alb['LoadBalancerArn'])
 # tagがnodelete以外を出力
           for a in tag['Tags']:
-            print a
-            if not a['Key'] == 'nodelete' and not k['Value'] == 'true':
-                print(alb['LoadBalancerArn'])
+#            print a
+            if not a['Key'] == ND and not k['Value'] == TR:
+#                print(alb['LoadBalancerArn'])
     response = client.delete_load_balancer(
         LoadBalancerArn=alb['LoadBalancerArn']
     )
