@@ -1,0 +1,7 @@
+#java
+JAVA_DOWNLOAD_URL: "http://download.oracle.com/otn-pub/java/jdk/8u112-b15/jdk-8u112-linux-x64.rpm"
+JAVA_RPM: "jdk-8u112-linux-x64.rpm"
+
+#elasticsearch
+ELASTICSEARCH_KEY: "https://artifacts.elastic.co/GPG-KEY-elasticsearch"
+ELASTICSEARCH_DOWNLOAD_URL: "https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.1.1.rpm"

@@ -1,0 +1,36 @@
+- name: set locale to /etc/cloud/cloud.cfg
+  lineinfile: 'dest=/etc/cloud/cloud.cfg line="locale: ja_JP.UTF-8"'
+
+- name: set repo_upgrade to /etc/cloud/cloud.cfg
+  lineinfile: 'dest=/etc/cloud/cloud.cfg regexp="repo_upgrade\:" line="repo_upgrade: none"'
+
+- name: set locale to /etc/sysconfig/i18n
+  replace: >
+    dest=/etc/sysconfig/i18n
+    regexp='^LANG=en_US\.UTF-8'
+    replace='LANG=ja_JP.UTF-8'
+
+- name: set zone to /etc/sysconfig/clock
+  replace: >
+    dest=/etc/sysconfig/clock
+    regexp='^ZONE=\"UTC\"'
+    replace='ZONE="Asia/Tokyo"'
+
+- name: set false to clock utc
+  replace: >
+    dest=/etc/sysconfig/clock
+    regexp='^UTC=true'
+    replace='UTC=false'
+
+- name: set localtime
+  file: >
+    src=/usr/share/zoneinfo/Asia/Tokyo
+    dest=/etc/localtime
+    state=link
+    force=yes
+
+- name: install packages
+  yum: name={{ item }} state=installed
+  with_items:
+    - telnet
+

@@ -1,0 +1,30 @@
+- name: Add Elasticsearch GPG key.
+  rpm_key:
+    key: "{{ ELASTICSEARCH_KEY }}"
+    state: present
+  tags: elasticsearch
+
+- name: Remove elasticsearch.repo
+  file: path=/etc/yum.repos.d/elasticsearch.repo state=absent
+  tags: elasticsearch
+
+- name: Install Elasticsearch.
+  yum: name="{{ ELASTICSEARCH_DOWNLOAD_URL }}"  state=present
+
+- name: Copy Elasticsearch Setting Files.
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: root
+    group: root
+  with_items:
+  - { src: roles/elasticsearch/files/elasticsearch.yml, dest: /etc/elasticsearch }
+  - { src: roles/elasticsearch/files/jvm.options, dest: /etc/elasticsearch }
+  notify: restart elasticsearch
+
+- elasticsearch_plugin:
+    state: present
+    name: mobz/discovery-ec2
+
+- name: elasticsearch enabled
+  service: name=elasticsearch enabled=yes state=started

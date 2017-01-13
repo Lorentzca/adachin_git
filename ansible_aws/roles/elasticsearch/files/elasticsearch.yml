@@ -1,0 +1,53 @@
+cluster.name: deliver-cluster
+
+discovery:
+    zen.hosts_provider: ec2
+
+cloud:
+ aws:
+  protocol: https
+  ec2:
+    protocol: https
+  region: ap-northeast
+ node.auto_attributes: true
+
+cluster:
+ routing:
+  allocation:
+   awareness:
+    attributes: aws_availability_zone
+
+network.host: 0.0.0.0
+
+# this value is required because we set "network.host"
+# be sure to modify it appropriately for a production cluster deployment
+# discovery.zen.minimum_master_nodes: 1
+
+# http.cors.enabled: true
+# http.cors.allow-origin: /https?:\/\/localhost(:[0-9]+)?/
+
+################################## Slow Log ##################################
+# index.number_of_replicas: 0
+
+# Shard level query and fetch threshold logging.
+
+#index.search.slowlog.threshold.query.warn: 10s
+#index.search.slowlog.threshold.query.info: 5s
+#index.search.slowlog.threshold.query.debug: 2s
+#index.search.slowlog.threshold.query.trace: 500ms
+
+#index.search.slowlog.threshold.query.trace: 0ms
+
+#index.search.slowlog.threshold.fetch.warn: 1s
+#index.search.slowlog.threshold.fetch.info: 800ms
+#index.search.slowlog.threshold.fetch.debug: 500ms
+#index.search.slowlog.threshold.fetch.trace: 200ms
+
+#index.search.slowlog.threshold.fetch.trace: 0ms
+
+#index.indexing.slowlog.threshold.index.warn: 10s
+#index.indexing.slowlog.threshold.index.info: 5s
+#index.indexing.slowlog.threshold.index.debug: 2s
+#index.indexing.slowlog.threshold.index.trace: 500ms
+
+#index.indexing.slowlog.threshold.index.trace: 0ms

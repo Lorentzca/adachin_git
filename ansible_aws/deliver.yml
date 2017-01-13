@@ -1,0 +1,6 @@
+- hosts: deliver
+  become: yes
+  roles:
+    - common
+    - java_install
+    - elasticsearch

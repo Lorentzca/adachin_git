@@ -1,0 +1,11 @@
+- name: Download java8-jdk
+  get_url: 
+      url: "{{ JAVA_DOWNLOAD_URL }}"
+      headers: "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie"
+      dest: "/var/tmp/{{ JAVA_RPM }}"
+  when: '"java_version.rc" != 0'
+
+- name: install java8-jdk
+  yum:
+    name: "/var/tmp/{{ JAVA_RPM }}"
+    state: present
