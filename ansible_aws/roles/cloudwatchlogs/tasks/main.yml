@@ -1,0 +1,19 @@
+- name: install packages
+  yum: name={{ item }} state=installed
+  with_items:
+    - awslogs
+
+- name: copy awscli.conf
+  copy:
+    src: "{{ item.src }}"
+    dest: "/etc/awslogs"
+    owner: root
+    group: root
+    mode: 0600
+  with_items:
+  - { src: roles/cloudwatchlogs/files/awscli.conf, dest: }
+  - { src: roles/cloudwatchlogs/files/awslogs.conf, dest: }
+  notify: restart awslogs
+
+- name: awslogs enabled
+  service: name=awslogs state=started enabled=yes state=started
