@@ -16,4 +16,4 @@
   notify: restart awslogs
 
 - name: awslogs enabled
-  service: name=awslogs state=started enabled=yes state=started
+  service: name=awslogs state=started enabled=yes
