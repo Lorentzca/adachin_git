@@ -11,7 +11,7 @@ resource "aws_vpc" "adachin-dev_vpc" {
 
 ##サブネットの作成(1a)
 resource "aws_subnet" "public-a" { 
-	vpc_id = "${aws_vpc.adachin-dev_vpc.id}"
+    vpc_id = "${aws_vpc.adachin-dev_vpc.id}"
     cidr_block = "10.0.0.0/24"
     availability_zone = "ap-northeast-1a"
     tags {
@@ -21,7 +21,7 @@ resource "aws_subnet" "public-a" {
 
 ##サブネットの追加(1c)
 resource "aws_subnet" "public-c" { 
-	vpc_id = "${aws_vpc.adachin-dev_vpc.id}"
+    vpc_id = "${aws_vpc.adachin-dev_vpc.id}"
     cidr_block = "10.0.1.0/24"
     availability_zone = "ap-northeast-1c"
     tags {
@@ -82,10 +82,13 @@ resource "aws_instance" "adachin01" {
     ami = "${var.ami}"
     instance_type = "${var.instance_type}"
     key_name = "adachin"
-    vpc_security_group_ids = [
-	  "${aws_security_group.adachin-dev.id}"
-	]
+    vpc_security_group_ids = ["${aws_security_group.adachin-dev.id}"]
     subnet_id = "${aws_subnet.public-a.id}"
+	ebs_block_device = {
+    device_name = "/dev/sdf"
+      volume_type = "gp2"
+      volume_size = "30"
+    }
     tags {
         Name = "adachin-dev"
     }
