@@ -84,8 +84,8 @@ resource "aws_instance" "adachin01" {
     key_name = "adachin"
     vpc_security_group_ids = ["${aws_security_group.adachin-dev.id}"]
     subnet_id = "${aws_subnet.public-a.id}"
-	ebs_block_device = {
-    device_name = "/dev/sdf"
+    ebs_block_device = {
+      device_name = "/dev/sdf"
       volume_type = "gp2"
       volume_size = "30"
     }
